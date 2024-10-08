@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ร้านไอติม</title>
+    <link rel="stylesheet" href="styles.css"> <!-- ลิงก์ไปยังไฟล์ CSS -->
+    <script defer src="script.js"></script> <!-- ลิงก์ไปยังไฟล์ JavaScript -->
+</head>
+<body>
+    <header>
+        <h1>ร้านไอติม</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">หน้าแรก</a></li>
+                <li><a href="#menu">เมนูไอติม</a></li>
+                <li><a href="#about">เกี่ยวกับเรา</a></li>
+                <li><a href="#contact">ติดต่อเรา</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h2>ยินดีต้อนรับสู่ร้านไอติมของเรา!</h2>
+            <p>ที่นี่คือที่ที่คุณจะได้พบกับไอติมที่อร่อยที่สุดในเมือง!</p>
+        </section>
+
+        <section id="menu">
+            <h2>เมนูไอติม</h2>
+            <div id="icecream-menu" class="menu-container">
+                <!-- ข้อมูลไอติมจะถูกเพิ่มที่นี่ผ่าน JavaScript -->
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>เกี่ยวกับเรา</h2>
+            <p>ร้านไอติมของเราเปิดให้บริการตั้งแต่ปี 2023 เรามุ่งมั่นที่จะให้บริการไอติมที่มีคุณภาพและอร่อยที่สุดสำหรับลูกค้าทุกคน</p>
+        </section>
+
+        <section id="contact">
+            <h2>ติดต่อเรา</h2>
+            <form id="contact-form">
+                <label for="name">ชื่อ:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">อีเมล:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">ข้อความ:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">ส่งข้อความ</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 ร้านไอติม. สงวนลิขสิทธิ์.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
