@@ -1,34 +1,48 @@
 const IceCream = require('../Models/icecreamModel');
 
-// เพิ่มไอติมใหม่
-exports.addIceCream = async (req, res) => {
+// Create
+exports.createIceCream = async (req, res) => {
     try {
-        const icecream = new IceCream(req.body);
-        await icecream.save();
-        res.status(201).json({ message: 'เพิ่มไอติมสำเร็จ', data: icecream });
-    } catch (err) {
-        res.status(500).json({ message: 'เกิดข้อผิดพลาดในการเพิ่มไอติม', error: err });
+        const newIceCream = new IceCream(req.body);
+        await newIceCream.save();
+        res.status(201).json({ message: 'เพิ่มไอติมสำเร็จ', data: newIceCream });
+    } catch (error) {
+        res.status(400).json({ message: 'เกิดข้อผิดพลาดในการเพิ่มไอติม', error: error.message });
     }
 };
 
-// แก้ไขข้อมูลไอติม
-exports.updateIceCream = async (req, res) => {
+// Read
+exports.getAllIceCreams = async (req, res) => {
     try {
-        const icecream = await IceCream.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!icecream) return res.status(404).json({ message: 'ไม่พบไอติม' });
-        res.status(200).json({ message: 'แก้ไขไอติมสำเร็จ', data: icecream });
-    } catch (err) {
-        res.status(500).json({ message: 'เกิดข้อผิดพลาดในการแก้ไขไอติม', error: err });
+        const iceCreams = await IceCream.find();
+        res.status(200).json({ message: 'เรียกข้อมูลไอติมสำเร็จ', data: iceCreams });
+    } catch (error) {
+        res.status(500).json({ message: 'เกิดข้อผิดพลาดในการเรียกข้อมูลไอติม', error: error.message });
     }
 };
 
-// ลบไอติม
-exports.deleteIceCream = async (req, res) => {
+// Update
+exports.updateIceCreamById = async (req, res) => {
     try {
-        const icecream = await IceCream.findByIdAndDelete(req.params.id);
-        if (!icecream) return res.status(404).json({ message: 'ไม่พบไอติม' });
-        res.status(200).json({ message: 'ลบไอติมสำเร็จ' });
-    } catch (err) {
-        res.status(500).json({ message: 'เกิดข้อผิดพลาดในการลบไอติม', error: err });
+        const iceCream = await IceCream.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!iceCream) {
+            return res.status(404).json({ message: 'ไม่พบไอติมที่ต้องการอัปเดต' });
+        }
+        res.status(200).json({ message: 'แก้ไขไอติมสำเร็จ', data: iceCream });
+    } catch (error) {
+        res.status(400).json({ message: 'เกิดข้อผิดพลาดในการแก้ไขไอติม', error: error.message });
+    }
+};
+
+// Delete
+exports.deleteIceCreamById = async (req, res) => {
+    try {
+        const iceCream = await IceCream.findByIdAndDelete(req.params.id);
+        if (!iceCream) {
+            return res.status(404).json({ message: 'ไม่พบไอติมที่ต้องการลบ' });
+        }
+        res.status(204).send(); // เปลี่ยนเป็น .send() แทนการส่ง JSON
+    } catch (error) {
+        res.status(500).json({ message: 'เกิดข้อผิดพลาดในการลบไอติม', error: error.message });
     }
 };

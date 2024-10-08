@@ -18,3 +18,5 @@ const iceCreamSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('IceCream', iceCreamSchema);
+
+

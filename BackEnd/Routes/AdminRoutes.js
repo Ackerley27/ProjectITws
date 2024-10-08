@@ -3,50 +3,17 @@ const router = express.Router();
 const adminController = require('../controllers/AdminController');
 
 // เส้นทาง API สำหรับ Admin
-router.post('/icecreams', adminController.addIceCream);
-router.put('/icecreams/:id', adminController.updateIceCream);
-router.delete('/icecreams/:id', adminController.deleteIceCream);
 
-// Create
-router.post('/', async (req, res) => {
-    try {
-        const newIceCream = new IceCream(req.body);
-        await newIceCream.save();
-        res.status(201).json(newIceCream);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-});
+// สร้างไอศกรีมใหม่
+router.post('/icecreams', adminController.createIceCream);
 
-// Read
-router.get('/', async (req, res) => {
-    try {
-        const iceCreams = await IceCream.find();
-        res.json(iceCreams);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+// อ่านข้อมูลไอศกรีมทั้งหมด
+router.get('/icecreams', adminController.getAllIceCreams);
 
-// Update
-router.put('/:id', async (req, res) => {
-    try {
-        const iceCream = await IceCream.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        res.json(iceCream);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-});
+// อัปเดตข้อมูลไอศกรีมโดยใช้ ID
+router.put('/icecreams/:id', adminController.updateIceCreamById);
 
-// Delete
-router.delete('/:id', async (req, res) => {
-    try {
-        await IceCream.findByIdAndDelete(req.params.id);
-        res.status(204).send();
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+// ลบไอศกรีมโดยใช้ ID
+router.delete('/icecreams/:id', adminController.deleteIceCreamById);
 
 module.exports = router;
-
